@@ -24,12 +24,19 @@ export async function g_pixels_to_edges(pixels) {
       let neighbors = [up, down, left, right];
       await m_js_for_each(neighbors, async n => {
         if (n.value === 0) {
-          await list_add(result, n.point);
+          await list_add(result, await midpoint([row, col], n.point));
         }
       });
     });
   });
   return result;
+}
+async function midpoint(p1, p2) {
+  return [await average(p1[0], p2[0]), await average(p1[1], p2[1])];
+}
+
+async function average(a, b) {
+  return (a + b) / 2;
 }
 async function g_pixel_get(pixels, r, c) {
   let value = pixels[r][c];
