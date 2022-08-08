@@ -10,6 +10,9 @@ export async function g_pixels_to_edges(pixels) {
       return;
     }
     await m_js_for_each(row, async (col, col_index) => {
+      if (await list_index_first_or_last_is(row, col_index)) {
+        return;
+      }
       if (col !== 1) {
         return;
       }
