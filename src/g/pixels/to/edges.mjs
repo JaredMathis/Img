@@ -24,7 +24,7 @@ export async function g_pixels_to_edges(pixels) {
       let neighbors = [up, down, left, right];
       await m_js_for_each(neighbors, async n => {
         if (n.value === 0) {
-          await list_add(result, await midpoint([row, col], n.point));
+          await list_add(result, await midpoint([row_index, col_index], n.point));
         }
       });
     });
