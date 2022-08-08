@@ -16,7 +16,10 @@ export async function g_pixels_to_edges(pixels) {
       if (col !== 1) {
         return;
       }
-      let up = pixels[row_index - 1];
+      let up = pixels[row_index - 1][col_index];
+      let down = pixels[row_index + 1][col_index];
+      let left = row[col_index - 1]
+      let right = row[col_index + 1]
     });
   });
 }
