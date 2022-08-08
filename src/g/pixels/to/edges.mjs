@@ -33,9 +33,10 @@ export async function g_pixels_to_edges(pixels) {
 }
 async function g_pixel_get(pixels, r, c) {
   let value = pixels[r][c];
+  let point = [r, c];
   let result = {
     value,
-    point: [r, c],
+    point,
     row: r,
     column: c
   };
