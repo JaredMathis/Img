@@ -7,7 +7,7 @@ export async function sandbox() {
   await m_js_arguments_assert()(arguments);
   let pixels;
   pixels = [[0, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]];
-  let edges = g_pixels_to_edges(pixels);
+  let edges = await g_pixels_to_edges(pixels);
   console.log(edges);
   return;
   let e1 = [[1, 1], [2, 1]];
