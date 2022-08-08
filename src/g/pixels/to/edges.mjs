@@ -24,12 +24,18 @@ export async function g_pixels_to_edges(pixels) {
       let neighbors = [up, down, left, right];
       await m_js_for_each(neighbors, async n => {
         if (n.value === 0) {
-          await list_add(result, await midpoint([row_index, col_index], n.point));
+          await m_js_for_each(await midpoints([row_index, col_index], n.point), async p => {
+            await list_add(result, p);
+          })
         }
       });
     });
   });
   return result;
+}
+async function midpoints(p1, p2) {
+  let mid = await midpoint(p1, p2);
+  return [mid];
 }
 async function midpoint(p1, p2) {
   let p_row = await average(p1[0], p2[0]);
