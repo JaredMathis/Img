@@ -47,7 +47,7 @@ async function midpoints(p1, p2) {
 async function midpoint(p1, p2) {
   let p_row = await average(p1[0], p2[0]);
   let p_col = await average(p1[1], p2[1]);
-  return [p_row, p_col];
+  return [Math.round(p_row), Math.round(p_col)];
 }
 
 async function average(a, b) {
