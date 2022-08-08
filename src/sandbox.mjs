@@ -1,4 +1,19 @@
+import { m_js_assert } from "mykro/src/m/js/assert.mjs";
+import { m_js_equals } from "mykro/src/m/js/equals.mjs";
 import {m_js_arguments_assert} from "./../node_modules/mykro/src/m/js/arguments/assert.mjs";
 export async function sandbox() {
   await m_js_arguments_assert()(arguments);
+
+  let pixels;
+  
+  pixels = [[0,0,0],[0,1,0],[0,1,0],[0,0,0]];
+
+  let edges = g_edges(pixels);
+
+  let e1 = [[1,1],[2,1]];
+  let e2 = [[1,1],[1,3]];
+  let e3 = [[1,3],[2,3]];
+  let e4 = [[2,1],[2,3]];
+
+  
 }
