@@ -35,12 +35,14 @@ export async function g_pixels_to_edges(pixels) {
 }
 async function midpoints(p1, p2) {
   let mid = await midpoint(p1, p2);
-  console.log({
-    mid,
-    a: p1[0] == p2[0],
-    b: p1[1] == p2[1],
-  })
-  return [mid];
+  let other;
+  if (p1[0] == p2[0]) {
+    other = [mid[0], mid[1] + 1];
+  }
+  if (p1[1] == p2[1]) {
+    other = [mid[0] + 1, mid[1]];
+  }
+  return [mid, other];
 }
 async function midpoint(p1, p2) {
   let p_row = await average(p1[0], p2[0]);
