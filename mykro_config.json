@@ -1,0 +1,11 @@
+{
+  "path": {
+    "src": {
+      "mykro": "./node_modules/mykro/src",
+      "other": []
+    }
+  },
+  "auto": {
+    "disabled": true
+  }
+}

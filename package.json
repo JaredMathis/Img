@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "mykro": "node ./node_modules/mykro/src/run.mjs"
+  },
+  "dependencies": {
+    "mykro": "^0.0.124"
+  }
+}
