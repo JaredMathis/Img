@@ -33,7 +33,8 @@ export async function g_pixels_to_edges(pixels) {
 }
 async function midpoint(p1, p2) {
   let p_row = await average(p1[0], p2[0]);
-  return [p_row, await average(p1[1], p2[1])];
+  let p_col = await average(p1[1], p2[1]);
+  return [p_row, p_col];
 }
 
 async function average(a, b) {
