@@ -5,6 +5,7 @@ import {m_js_arguments_assert} from "./../../../../node_modules/mykro/src/m/js/a
 import { list_index_first_or_last_is } from "../../../list/index/first/or/last/is.mjs";
 export async function g_pixels_to_edges(pixels) {
   await m_js_arguments_assert(list_is)(arguments);
+  let result = [];
   await m_js_for_each(pixels, async (row, row_index) => {
     if (await list_index_first_or_last_is(pixels, row_index)) {
       return;
@@ -16,10 +17,22 @@ export async function g_pixels_to_edges(pixels) {
       if (col !== 1) {
         return;
       }
-      let up = pixels[row_index - 1][col_index];
-      let down = pixels[row_index + 1][col_index];
-      let left = row[col_index - 1]
-      let right = row[col_index + 1]
+      let up = await g_pixel_get(pixels, row_index - 1, col_index);
+      let down = await g_pixel_get(pixels, row_index + 1, col_index);
+      let left = await g_pixel_get(pixels, row_index, col_index - 1);
+      let right = await g_pixel_get(pixels, row_index, col_index + 1);
+      if (up.value === 0) {
+        await list_add(result, [[row_index, ]])
+      }
     });
   });
+}
+async function g_pixel_get(pixels, r, c) {
+  let value = pixels[r][c];
+  let result = {
+    value,
+    row: r,
+    column: c,
+  }
+  return result;
 }
