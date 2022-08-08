@@ -35,7 +35,7 @@ async function g_pixel_get(pixels, r, c) {
   let value = pixels[r][c];
   let result = {
     value,
-    point: [c, r],
+    point: [r, c],
     row: r,
     column: c
   };
