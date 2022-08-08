@@ -8,7 +8,7 @@ export async function sandbox() {
   
   pixels = [[0,0,0],[0,1,0],[0,1,0],[0,0,0]];
 
-  let edges = g_edges(pixels);
+  let edges = g_pixels_to_edges(pixels);
 
   let e1 = [[1,1],[2,1]];
   let e2 = [[1,1],[1,3]];
