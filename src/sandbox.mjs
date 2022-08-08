@@ -15,5 +15,13 @@ export async function sandbox() {
   let e3 = [[1,3],[2,3]];
   let e4 = [[2,1],[2,3]];
 
-  
+  let f = e1;
+  let contains = false;
+  await m_js_for_each(edges, async e => {
+    let matches = e[0] === f[0] && e[1] === f[1] || e[0] === f[1] && e[1] === f[0];
+    if (matches) {
+      contains = true;
+      return true;
+    }
+  })
 }
