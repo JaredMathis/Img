@@ -1,7 +1,8 @@
+import {list_add} from "./../../../../node_modules/mykro/src/list/add.mjs";
 import {m_js_for_each} from "./../../../../node_modules/mykro/src/m/js/for/each.mjs";
 import {list_is} from "./../../../../node_modules/mykro/src/list/is.mjs";
 import {m_js_arguments_assert} from "./../../../../node_modules/mykro/src/m/js/arguments/assert.mjs";
-import { list_index_first_or_last_is } from "../../../list/index/first/or/last/is.mjs";
+import {list_index_first_or_last_is} from "./../../../list/index/first/or/last/is.mjs";
 export async function g_pixels_to_edges(pixels) {
   await m_js_arguments_assert(list_is)(arguments);
   let result = [];
@@ -20,7 +21,6 @@ export async function g_pixels_to_edges(pixels) {
       let down = await g_pixel_get(pixels, row_index + 1, col_index);
       let left = await g_pixel_get(pixels, row_index, col_index - 1);
       let right = await g_pixel_get(pixels, row_index, col_index + 1);
-
       let neighbors = [up, down, left, right];
       await m_js_for_each(neighbors, async n => {
         if (n.value === 0) {
@@ -37,7 +37,7 @@ async function g_pixel_get(pixels, r, c) {
     value,
     point: [c, r],
     row: r,
-    column: c,
-  }
+    column: c
+  };
   return result;
 }
