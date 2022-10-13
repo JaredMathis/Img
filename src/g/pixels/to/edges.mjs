@@ -22,7 +22,7 @@ export async function g_pixels_to_edges(pixels) {
       let left = await g_pixel_get(pixels, row_index, col_index - 1);
       let right = await g_pixel_get(pixels, row_index, col_index + 1);
       let neighbors = [up, down, left, right];
-      console.log({neighbors})
+      console.log(JSON.stringify({neighbors}));
       await m_js_for_each(neighbors, async n => {
         if (n.value === 0) {
           await m_js_for_each(await midpoints([row_index, col_index], n.point), async p => {
