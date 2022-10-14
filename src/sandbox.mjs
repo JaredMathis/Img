@@ -36,12 +36,18 @@ function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 async function glue_segments_all(segments) {
-  return;
   let result = segments.slice();
-  while (true) {
+  let i = 100
+  while (i-- >= 0) {
     let changed = false;
-    await m_js_for_each(segments, async (s1, index) => {
-      await m_js_for_each(segments, async (s2, index2) => {
+    await m_js_for_each(result, async (s1, index) => {
+      if (changed) {
+        return;
+      }
+      await m_js_for_each(result, async (s2, index2) => {
+        if (changed) {
+          return;
+        }
         if (index2 >= index) {
           return;
         }
@@ -52,11 +58,7 @@ async function glue_segments_all(segments) {
           result.push(glued);
         }
         changed = true;
-        return true;
       });
-      if (changed) {
-        return true;
-      }
     });
     if (!changed) {
       break;
