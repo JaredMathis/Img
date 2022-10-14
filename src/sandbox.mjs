@@ -17,7 +17,6 @@ export async function sandbox() {
   let segments = await to_segments(pixels);
   let glued = await glue_segments_all(segments);
   let midpointed = await segments_midpoint_all(glued);
-  return;
   let scale_factor = 10;
   console.log({midpointed})
   return;
