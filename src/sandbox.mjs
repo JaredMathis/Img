@@ -14,10 +14,27 @@ export async function sandbox() {
     let row = [];
     pixels.push(row)
     for (let j = 0; j < r.bitmap.width; j++) {
-      console.log(r.getPixelColor(j, i))
-      break;
+      if (r.getPixelColor(j, i) === 4294967295) {
+        row.push(0);
+      } else {
+        row.push(1);
+      }
     }
   }
+
+  let image = new Jimp(pixels[0].length, pixels.length, function (err, image) {
+    if (err) throw err;
+  
+    pixels.forEach((row, y) => {
+      row.forEach((color, x) => {
+        image.setPixelColor(color, x, y);
+      });
+    });
+  
+    image.write('src/test.png', (err) => {
+      if (err) throw err;
+    });
+  });
 }  
 async function simple_3() {
   let actual = await glue_segments([[1, 2], [1, 3]], [[1, 3], [1, 4]]);
