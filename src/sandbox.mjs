@@ -8,11 +8,23 @@ export async function sandbox() {
   await simple_1();
   await simple_2();
   await simple_3();
-  let r = await Jimp.read('src/d.png');
+  const image_path = 'src/d.png';
+  let pixels = await image_to_pixels(image_path);
+  let segments = await to_segments(pixels);
+  let glued = await glue_segments_all(segments);
+  let midpointed = await segments_midpoint_all(glued);
+  let scale_factor = 10;
+  midpointed.forEach(row => row.forEach(segment => segment.forEach(point => [0, 1].forEach(i => point[i] = point[i]*scale_factor)
+     )))
+
+  await pixels_to_image(pixels, 'src/test.png');
+}  
+async function image_to_pixels(image_path) {
+  let r = await Jimp.read(image_path);
   let pixels = [];
   for (let i = 0; i < r.bitmap.height; i++) {
     let row = [];
-    pixels.push(row)
+    pixels.push(row);
     for (let j = 0; j < r.bitmap.width; j++) {
       if (r.getPixelColor(j, i) === 4294967295) {
         row.push(0);
@@ -21,9 +33,9 @@ export async function sandbox() {
       }
     }
   }
+  return pixels;
+}
 
-  await pixels_to_image(pixels, 'src/test.png');
-}  
 function pixels_to_image(pixels, image_path) {
   return new Promise((resolve, reject) => {
     new Jimp(pixels[0].length, pixels.length, function (err, image) {

@@ -3,6 +3,7 @@
     "mykro": "node ./node_modules/mykro/src/run.mjs"
   },
   "dependencies": {
+    "gm": "^1.25.0",
     "jimp": "^0.16.2",
     "mykro": "^0.0.124"
   }
