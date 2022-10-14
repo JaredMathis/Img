@@ -49,7 +49,7 @@ async function to_segments(grid) {
             await list_add(result, [point_translate(m, 0, 0.5), point_translate(m, 0, -0.5)]);
           }   
           if (horizontal.includes(neighbor)) {
-            await list_add(result, [point_translate(m, 0.5, 0.5), point_translate(m, -0.5, 0.5)]);
+            await list_add(result, [point_translate(m, 0.5, 0), point_translate(m, -0.5, 0)]);
           }
         }
       }
