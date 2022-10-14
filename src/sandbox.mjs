@@ -42,8 +42,7 @@ function json_equals(a,b) {
 async function segments_midpoint(segments) {
   
 }
-async function glue_segments_all(segments) {
-  let result = segments.slice();
+async function while_changed_for_each_nested(lambda) {
   while (true) {
     let changed = false;
     await m_js_for_each(result, async (s1, index) => {
@@ -54,22 +53,28 @@ async function glue_segments_all(segments) {
         if (changed) {
           return;
         }
-        if (index2 >= index) {
-          return;
-        }
-        let glued;
-        if (glued = await glue_segments(s1, s2)) {
-          result.splice(result.indexOf(s1), 1);
-          result.splice(result.indexOf(s2), 1);
-          result.push(glued);
-          changed = true;
-        }
+        changed = await lambda(s1, s2, index, index2);
       });
     });
     if (!changed) {
       break;
     }
   }
+}
+async function glue_segments_all(segments) {
+  let result = segments.slice();
+  await while_changed_for_each_nested((s1, s2, index, index2) => {
+    if (index2 >= index) {
+      return;
+    }
+    let glued;
+    if (glued = await glue_segments(s1, s2)) {
+      result.splice(result.indexOf(s1), 1);
+      result.splice(result.indexOf(s2), 1);
+      result.push(glued);
+      return true;
+    }
+  })
   return result;
 }
 async function glue_segments(s1, s2) {
