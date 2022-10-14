@@ -56,8 +56,8 @@ async function glue_segments_all(segments) {
           result.splice(result.indexOf(s1), 1);
           result.splice(result.indexOf(s2), 1);
           result.push(glued);
+          changed = true;
         }
-        changed = true;
       });
     });
     if (!changed) {
