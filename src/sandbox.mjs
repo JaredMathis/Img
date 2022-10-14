@@ -29,9 +29,12 @@ export async function sandbox() {
     .drawLine(m[0][1], m[0][0], m[1][1], m[1][0])
   })
 
-  image.write('src/output.png', () => {})
+  image.write('src/output.png', (err) => {
+    if (!err) console.log('done');
+    else console.error(err)
+  })
 
-  await pixels_to_image(pixels, 'src/test.png');
+  // await pixels_to_image(pixels, 'src/test.png');
 }  
 async function image_to_pixels(image_path) {
   let r = await Jimp.read(image_path);
