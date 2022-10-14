@@ -77,9 +77,6 @@ async function while_changed_for_each_nested(result, lambda) {
 async function glue_segments_all(segments) {
   let result = segments.slice();
   await while_changed_for_each_nested(result, async (s1, s2, index, index2) => {
-    if (index2 >= index) {
-      return;
-    }
     let glued;
     if (glued = await glue_segments(s1, s2)) {
       result.splice(result.indexOf(s1), 1);
