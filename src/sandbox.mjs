@@ -22,6 +22,9 @@ async function simple_2() {
   let actual2 = await glue_segments_all(actual);
   let expected2 = [[[1,2],[1,1]],[[3,2],[3,1]],[[3,1],[1,1]],[[3,2],[1,2]]];
   await m_js_assert(json_equals)(actual2, expected2);
+  let actual3 = await segments_midpoint_all(actual2);
+  let expected3 = [[[1,2],[1.5,1]],[[1,2],[1.5,3]],[[2,2],[1.5,1]],[[2,2],[1.5,3]]];
+  await m_js_assert(json_equals)(actual3, expected3);
 }
 async function simple_1() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
