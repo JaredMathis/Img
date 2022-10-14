@@ -57,6 +57,9 @@ async function to_segments(grid) {
   });
   return result;
 }
+function point_translate(p, x, y) {
+  return [p[0] + y, p[1] + x];
+}
 function midpoint(x1, y1, x2, y2) {
   return [(y1 + y2) / 2, (x1 + x2) / 2];
 }
