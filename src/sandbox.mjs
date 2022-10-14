@@ -14,11 +14,18 @@ async function to_segments(grid) {
       if (await list_index_first_or_last_is(row, col_index)) {
         return;
       }
+      let neighbors = {
+        up: grid[row_index-1][col_index],
+        down: grid[row_index+1][col_index],
+        left: grid[row_index][col_index-1],
+        right: grid[row_index][col_index+1],
+      }
       let value = grid[row_index][col_index];
       console.log({
         row_index,
         col_index,
-        value
+        value,
+        neighbors
       });
     });
   });
