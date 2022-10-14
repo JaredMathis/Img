@@ -27,7 +27,7 @@ export async function sandbox() {
   
     pixels.forEach((row, y) => {
       row.forEach((color, x) => {
-        image.setPixelColor(0xFFFFFFFF, x, y);
+        image.setPixelColor(color === 0 ? 0xFFFFFFFF : 0x000000FF, x, y);
       });
     });
   
