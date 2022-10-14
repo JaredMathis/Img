@@ -4,15 +4,18 @@ import {m_js_for_each} from "./../node_modules/mykro/src/m/js/for/each.mjs";
 import { m_js_assert } from "mykro/src/m/js/assert.mjs";
 import { m_js_equals } from "mykro/src/m/js/equals.mjs";
 export async function sandbox() {
+  await simple_1();
+}  
+async function simple_1() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
   let expected = [
-    [ [ 1, 2 ], [ 1, 1 ] ],
-    [ [ 2, 2 ], [ 2, 1 ] ],
-    [ [ 2, 1 ], [ 1, 1 ] ],
-    [ [ 2, 2 ], [ 1, 2 ] ]
+    [[1, 2], [1, 1]],
+    [[2, 2], [2, 1]],
+    [[2, 1], [1, 1]],
+    [[2, 2], [1, 2]]
   ];
   let actual = await to_segments(simple);
-  await m_js_assert(json_equals)(actual, expected)
+  await m_js_assert(json_equals)(actual, expected);
 }
 function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
