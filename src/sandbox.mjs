@@ -46,11 +46,10 @@ async function to_segments(grid) {
         if (grid[n.row][n.col] === 0) {   
           let m = midpoint(n.col, n.row, col_index, row_index);    
           if (vertical.includes(neighbor)) {
-            await list_add(result, [point_translate(m, 0, 0.5), point_translate(m, 0, 1.5)]);
           }   
           if (horizontal.includes(neighbor)) {
-            await list_add(result, [point_translate(m, 0.5, 0), point_translate(m, -0.5, 0)]);
           }
+          await list_add(result, [point_translate(m, 0, 0), point_translate(m, 0, 0)]);
         }
       }
     });
