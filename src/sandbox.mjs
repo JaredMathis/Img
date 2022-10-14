@@ -39,6 +39,9 @@ async function simple_1() {
 function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
+async function segments_midpoint(segments) {
+  
+}
 async function glue_segments_all(segments) {
   let result = segments.slice();
   while (true) {
