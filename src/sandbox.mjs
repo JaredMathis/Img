@@ -64,6 +64,7 @@ async function glue_segments_all(segments) {
       break;
     }
   }
+  console.log(result)
 }
 async function glue_segments(s1, s2) {
   if (!await segments_adjacent(s1, s2)) {
