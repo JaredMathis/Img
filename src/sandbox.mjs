@@ -18,14 +18,14 @@ export async function sandbox() {
   let glued = await glue_segments_all(segments);
   let midpointed = await segments_midpoint_all(glued);
   let scale_factor = 10;
-  console.log(midpointed)
-  return;
   midpointed
     .forEach(segment => segment
       .forEach(point => [0, 1]
         .forEach(i => point[i] = point[i]*scale_factor)));
 
 
+        console.log(midpointed)
+        return;
   let image = gm(pixels[0].length * scale_factor, pixels.length * scale_factor);
 
   image.stroke("#000000", 20)
