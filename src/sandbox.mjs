@@ -5,7 +5,7 @@ export async function sandbox() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
   let expected = [[[1, 1], [1, 2]], [[1, 1], [2, 1]], [[2, 1], [2, 2]], [[2, 1], [2, 2]]];
   let actual = await to_segments(simple);
-  console.log({actual})
+  console.log(actual)
 }
 async function to_segments(grid) {
   let result = [];
