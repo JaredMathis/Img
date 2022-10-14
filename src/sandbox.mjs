@@ -31,6 +31,7 @@ async function simple_1() {
   let actual = await to_segments(simple);
   await m_js_assert(json_equals)(actual, expected);
   let actual2 = await glue_segments_all(actual);
+  console.log(actual2)
 }
 function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
