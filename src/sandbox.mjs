@@ -53,7 +53,7 @@ async function to_segments(grid) {
           if (horizontal.includes(neighbor)) {
             v_offset = 0.5;
           }
-          await list_add(result, [point_translate(m, h_offset, v_offset), point_translate(m, -h_offset, -v_offset)]);
+          await list_add(result, [point_translate(m, h_offset + 0.5, v_offset + 0.5), point_translate(m, -h_offset + 0.5, -v_offset + 0.5)]);
         }
       }
     });
