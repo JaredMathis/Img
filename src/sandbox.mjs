@@ -22,14 +22,14 @@ export async function sandbox() {
     .forEach(segment => segment
       .forEach(point => [0, 1]
         .forEach(i => point[i] = point[i]*scale_factor)));
-
-
-        console.log(midpointed)
-        return;
   let image = gm(pixels[0].length * scale_factor, pixels.length * scale_factor);
 
-  image.stroke("#000000", 20)
-  .drawLine(100, 30, 400, 80)
+  midpointed.forEach(m => {
+    image.stroke("#000000", 20)
+    .drawLine(m[0][1], m[0][0], m[1][1], m[1][0])
+  })
+
+  image.write('src/output.png', () => {})
 
   await pixels_to_image(pixels, 'src/test.png');
 }  
