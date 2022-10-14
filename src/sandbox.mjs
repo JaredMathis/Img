@@ -6,9 +6,14 @@ import { m_js_equals } from "mykro/src/m/js/equals.mjs";
 export async function sandbox() {
   await simple_1();
   await simple_2();
-  let actual = await glue_segments([[1,2],[1,3]],[[1,3],[1,4]]);
-  console.log(actual)
+  await simple_3();
 }  
+async function simple_3() {
+  let actual = await glue_segments([[1, 2], [1, 3]], [[1, 3], [1, 4]]);
+  let expected = [[1, 4], [1, 2]];
+  await m_js_assert(json_equals)(actual, expected);
+}
+
 async function simple_2() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]];
   let expected = [[[1,2],[1,1]],[[2,1],[1,1]],[[2,2],[1,2]],[[3,2],[3,1]],[[3,1],[2,1]],[[3,2],[2,2]]];
