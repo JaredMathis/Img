@@ -35,22 +35,36 @@ async function simple_1() {
   await m_js_assert(json_equals)(actual, expected);
   let actual2 = await glue_segments_all(actual);
   await m_js_assert(json_equals)(actual2, expected);
+  let actual3 = await segments_midpoint_all(actual2);
+  console.log(actual3)
 }
 function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
-async function segments_midpoint(segments) {
-  let result = segments.slice();
-  await while_changed_for_each_nested(result, async (s1, s2, index, index2) => {
-    let glued;
-    if (glued = await glue_segments(s1, s2)) {
-      result.splice(result.indexOf(s1), 1);
-      result.splice(result.indexOf(s2), 1);
-      result.push(glued);
-      return true;
-    }
-  })
+async function segments_midpoint_all(segments) {
+  let result = [];
+  await m_js_for_each(result, async (s1, index) => {
+    await m_js_for_each(result, async (s2, index2) => {
+      let m = await segments_midpoint(s1, s2);
+      if (m) {
+        result.push(m);
+      }
+    });
+  });
   return result;
+}
+async function segments_midpoint(s1, s2) {
+  if (!await segments_adjacent(s1, s2)) {
+    return false;
+  }
+  if (await segments_parallel(s1, s2)) {
+    return false;
+  }
+
+  return [midpoint_segment(s1), midpoint_segment(s2)];
+}
+function midpoint_segment(s) {
+  return midpoint(s[0][0], s[0][1], s[1][0], s[1][1])
 }
 async function while_changed_for_each_nested(result, lambda) {
   while (true) {
