@@ -46,6 +46,7 @@ async function segments_midpoint_all(segments) {
   await m_js_for_each(result, async (s1, index) => {
     await m_js_for_each(result, async (s2, index2) => {
       let m = await segments_midpoint(s1, s2);
+      console.log(m)
       if (m) {
         result.push(m);
       }
