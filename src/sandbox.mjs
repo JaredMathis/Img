@@ -11,8 +11,8 @@ export async function sandbox() {
   await simple_3();
   const image_path = 'src/d.png';
   let pixels = await image_to_pixels(image_path);
-  return;
   let segments = await to_segments(pixels);
+  return;
   let glued = await glue_segments_all(segments);
   let midpointed = await segments_midpoint_all(glued);
   let scale_factor = 10;
