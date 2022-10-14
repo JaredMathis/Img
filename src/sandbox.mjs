@@ -57,6 +57,7 @@ async function glue_segments_all(segments) {
           result.splice(result.indexOf(s2), 1);
           result.push(glued);
           changed = true;
+          console.log({s1,s2,glued})
         }
       });
     });
