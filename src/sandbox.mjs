@@ -3,10 +3,13 @@ import {list_index_first_or_last_is} from "./list/index/first/or/last/is.mjs";
 import {m_js_for_each} from "./../node_modules/mykro/src/m/js/for/each.mjs";
 import { m_js_assert } from "mykro/src/m/js/assert.mjs";
 import { m_js_equals } from "mykro/src/m/js/equals.mjs";
+import Jimp from 'jimp';
 export async function sandbox() {
   await simple_1();
   await simple_2();
   await simple_3();
+  let r = await Jimp.read('src/d.png');
+  console.log({r})
 }  
 async function simple_3() {
   let actual = await glue_segments([[1, 2], [1, 3]], [[1, 3], [1, 4]]);
