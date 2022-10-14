@@ -45,6 +45,9 @@ async function segments_midpoint_all(segments) {
   let result = [];
   await m_js_for_each(segments, async (s1, index) => {
     await m_js_for_each(segments, async (s2, index2) => {
+      if (index2 >= index) {
+        return;
+      }
       let m = await segments_midpoint(s1, s2);
       if (m) {
         result.push(m);
