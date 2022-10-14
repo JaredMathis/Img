@@ -44,14 +44,9 @@ async function to_segments(grid) {
           await list_add(result, midpoint(n.col, n.row, row_index, col_index));
         }
       }
-      console.log({
-        row_index,
-        col_index,
-        value,
-        neighbors
-      });
     });
   });
+  return result;
 }
 function midpoint(x1, y1, x2, y2) {
   return [(y1 + y2) / 2, (x1 + x2) / 2];
