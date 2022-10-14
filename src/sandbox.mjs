@@ -43,14 +43,14 @@ async function to_segments(grid) {
       let horizontal = ['left', 'right'];
       for (let neighbor in neighbors) {
         let n = neighbors[neighbor];
-        if (grid[n.row][n.col] === 0) {
-          let h_offset = 0;
-          let v_offset = 0;          
+        if (grid[n.row][n.col] === 0) {   
+          let m = midpoint(n.col, n.row, col_index, row_index);    
           if (vertical.includes(neighbor)) {
-            v_offset = 0.5;
+            await list_add(result, [point_translate(m, 0.5, 0.5), point_translate(m, 0.5, -0.5)]);
+          }   
+          if (horizontal.includes(neighbor)) {
+            await list_add(result, [point_translate(m, 0.5, 0.5), point_translate(m, -0.5, 0.5)]);
           }
-          let m = midpoint(n.col, n.row, col_index, row_index);
-          await list_add(result, [m,m]);
         }
       }
     });
