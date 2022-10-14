@@ -6,6 +6,7 @@ import { m_js_equals } from "mykro/src/m/js/equals.mjs";
 export async function sandbox() {
   await simple_1();
   await simple_2();
+  let actual = await glue_segments([[1,2],[1,3],[1,3],[1,4]]);
 }  
 async function simple_2() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]];
@@ -28,7 +29,21 @@ function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 async function glue_segments_all(segments) {
-
+  
+}
+async function glue_segments(s1, s2) {
+  if (!await segments_adjacent(s1, s2)) {
+    return false;
+  }
+  if (!await segments_parallel(s1, s2)) {
+    return false;
+  }
+  let c = s1.concat(s2);
+  let cx_min = Math.min(...c.map(d => d[1]));
+  let cy_min = Math.min(...c.map(d => d[0]));
+  let cx_max = Math.max(...c.map(d => d[1]));
+  let cy_max = Math.max(...c.map(d => d[0]));
+  return [[cy_max, cx_max], [cy_min, cx_min]];
 }
 async function segments_parallel(s1, s2) {
   let result = false;
