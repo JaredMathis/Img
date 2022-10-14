@@ -42,7 +42,7 @@ async function to_segments(grid) {
       for (let neighbor in neighbors) {
         let n = neighbors[neighbor];
         if (grid[n.row][n.col] === 0) {
-          await list_add(result, midpoint(n.col, n.row, row_index, col_index));
+          await list_add(result, [midpoint(n.col, n.row, row_index, col_index), midpoint(n.col, n.row, row_index, col_index)]);
         }
       }
     });
