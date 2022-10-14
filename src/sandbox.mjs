@@ -39,10 +39,18 @@ async function to_segments(grid) {
           col: col_index + 1
         }
       };
+      let vertical = ['up', 'down'];
+      let horizontal = ['left', 'right'];
       for (let neighbor in neighbors) {
         let n = neighbors[neighbor];
         if (grid[n.row][n.col] === 0) {
-          await list_add(result, [midpoint(n.col, n.row, row_index, col_index), midpoint(n.col, n.row, row_index, col_index)]);
+          let h_offset = 0;
+          let v_offset = 0;          
+          if (vertical.includes(neighbor)) {
+            v_offset = 0.5;
+          }
+          let m = midpoint(n.col, n.row, col_index, row_index);
+          await list_add(result, [m,m]);
         }
       }
     });
