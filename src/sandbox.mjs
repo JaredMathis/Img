@@ -30,12 +30,38 @@ async function simple_1() {
   ];
   let actual = await to_segments(simple);
   await m_js_assert(json_equals)(actual, expected);
+  let actual2 = await glue_segments_all(actual);
 }
 function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 async function glue_segments_all(segments) {
-  
+  return;
+  let result = segments.slice();
+  while (true) {
+    let changed = false;
+    await m_js_for_each(segments, async (s1, index) => {
+      await m_js_for_each(segments, async (s2, index2) => {
+        if (index2 >= index) {
+          return;
+        }
+        let glued;
+        if (glued = await glue_segments(s1, s2)) {
+          result.splice(result.indexOf(s1), 1);
+          result.splice(result.indexOf(s2), 1);
+          result.push(glued);
+        }
+        changed = true;
+        return true;
+      });
+      if (changed) {
+        return true;
+      }
+    });
+    if (!changed) {
+      break;
+    }
+  }
 }
 async function glue_segments(s1, s2) {
   if (!await segments_adjacent(s1, s2)) {
