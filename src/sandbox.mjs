@@ -37,8 +37,7 @@ function json_equals(a,b) {
 }
 async function glue_segments_all(segments) {
   let result = segments.slice();
-  let i = 100
-  while (i-- >= 0) {
+  while (true) {
     let changed = false;
     await m_js_for_each(result, async (s1, index) => {
       if (changed) {
@@ -64,7 +63,7 @@ async function glue_segments_all(segments) {
       break;
     }
   }
-  console.log({result, i})
+  return result;
 }
 async function glue_segments(s1, s2) {
   if (!await segments_adjacent(s1, s2)) {
