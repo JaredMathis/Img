@@ -4,18 +4,30 @@ import {m_js_for_each} from "./../node_modules/mykro/src/m/js/for/each.mjs";
 import { m_js_assert } from "mykro/src/m/js/assert.mjs";
 import { m_js_equals } from "mykro/src/m/js/equals.mjs";
 import Jimp from 'jimp';
+import gm from 'gm';
 export async function sandbox() {
   await simple_1();
   await simple_2();
   await simple_3();
   const image_path = 'src/d.png';
   let pixels = await image_to_pixels(image_path);
+  return;
   let segments = await to_segments(pixels);
   let glued = await glue_segments_all(segments);
   let midpointed = await segments_midpoint_all(glued);
   let scale_factor = 10;
-  midpointed.forEach(row => row.forEach(segment => segment.forEach(point => [0, 1].forEach(i => point[i] = point[i]*scale_factor)
-     )))
+  console.log({midpointed})
+  return;
+  midpointed
+    .forEach(segment => segment
+      .forEach(point => [0, 1]
+        .forEach(i => point[i] = point[i]*scale_factor)));
+
+
+  let image = gm(pixels[0].length * scale_factor, pixels.length * scale_factor);
+
+  image.stroke("#000000", 20)
+  .drawLine(100, 30, 400, 80)
 
   await pixels_to_image(pixels, 'src/test.png');
 }  
