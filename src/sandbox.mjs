@@ -9,7 +9,15 @@ export async function sandbox() {
   await simple_2();
   await simple_3();
   let r = await Jimp.read('src/d.png');
-  console.log({r})
+  let pixels = [];
+  for (let i = 0; i < r.bitmap.height; i++) {
+    let row = [];
+    pixels.push(row)
+    for (let j = 0; j < r.bitmap.width; j++) {
+      console.log(r.getPixelColor(j, i))
+      break;
+    }
+  }
 }  
 async function simple_3() {
   let actual = await glue_segments([[1, 2], [1, 3]], [[1, 3], [1, 4]]);
