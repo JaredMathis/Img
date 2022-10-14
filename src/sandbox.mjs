@@ -36,7 +36,13 @@ async function simple_1() {
   let actual2 = await glue_segments_all(actual);
   await m_js_assert(json_equals)(actual2, expected);
   let actual3 = await segments_midpoint_all(actual2);
-  console.log(actual3)
+  let expected3 = [
+    [ [ 1, 1.5 ], [ 1.5, 1 ] ],
+    [ [ 1, 1.5 ], [ 1.5, 2 ] ],
+    [ [ 2, 1.5 ], [ 1.5, 1 ] ],
+    [ [ 2, 1.5 ], [ 1.5, 2 ] ]
+  ];
+  await m_js_assert(json_equals)(actual3, expected3);
 }
 function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
