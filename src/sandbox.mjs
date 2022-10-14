@@ -83,13 +83,11 @@ async function glue_segments(s1, s2) {
 }
 async function segments_parallel(s1, s2) {
   let result = false;
-  await m_js_for_each(s1, async p1 => {
     await m_js_for_each(s2, async p2 => {
-      if (p1[0] == p2[0] || p1[1] == p2[1]) {
+      if (s1[0][0] == p2[0] && s1[1][0] == p2[0] || s1[0][1] == p2[1] && s1[1][1] == p2[1]) {
         result = true;
       }
     })
-  })
   return result;
 }
 async function segments_adjacent(s1, s2) {
