@@ -27,6 +27,31 @@ async function simple_1() {
 function json_equals(a,b) {
   return JSON.stringify(a) === JSON.stringify(b)
 }
+async function glue_segments_all(segments) {
+
+}
+async function segments_parallel(s1, s2) {
+  let result = false;
+  await m_js_for_each(s1, async p1 => {
+    await m_js_for_each(s2, async p2 => {
+      if (p1[0] == p2[0] || p1[1] == p2[1]) {
+        result = true;
+      }
+    })
+  })
+  return result;
+}
+async function segments_adjacent(s1, s2) {
+  let result = false;
+  await m_js_for_each(s1, async p1 => {
+    await m_js_for_each(s2, async p2 => {
+      if (json_equals(p1, p2)) {
+        result = true;
+      }
+    })
+  })
+  return result;
+}
 async function to_segments(grid) {
   let result = [];
   await m_js_for_each(grid, async (row, row_index) => {
