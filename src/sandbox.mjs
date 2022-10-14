@@ -5,7 +5,14 @@ import { m_js_assert } from "mykro/src/m/js/assert.mjs";
 import { m_js_equals } from "mykro/src/m/js/equals.mjs";
 export async function sandbox() {
   await simple_1();
+  await simple_2();
 }  
+async function simple_2() {
+  let simple = [[0, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]];
+  let expected = [[[1,2],[1,1]],[[2,1],[1,1]],[[2,2],[1,2]],[[3,2],[3,1]],[[3,1],[2,1]],[[3,2],[2,2]]];
+  let actual = await to_segments(simple);
+  await m_js_assert(json_equals)(actual, expected);
+}
 async function simple_1() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
   let expected = [
