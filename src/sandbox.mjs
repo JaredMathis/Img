@@ -7,6 +7,7 @@ export async function sandbox() {
   await simple_1();
   await simple_2();
   let actual = await glue_segments([[1,2],[1,3]],[[1,3],[1,4]]);
+  console.log(actual)
 }  
 async function simple_2() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 0]];
