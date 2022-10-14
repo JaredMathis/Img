@@ -42,7 +42,7 @@ function json_equals(a,b) {
 async function segments_midpoint(segments) {
   
 }
-async function while_changed_for_each_nested(lambda) {
+async function while_changed_for_each_nested(result, lambda) {
   while (true) {
     let changed = false;
     await m_js_for_each(result, async (s1, index) => {
@@ -63,7 +63,7 @@ async function while_changed_for_each_nested(lambda) {
 }
 async function glue_segments_all(segments) {
   let result = segments.slice();
-  await while_changed_for_each_nested((s1, s2, index, index2) => {
+  await while_changed_for_each_nested(result, async (s1, s2, index, index2) => {
     if (index2 >= index) {
       return;
     }
