@@ -6,15 +6,18 @@ import { m_js_equals } from "mykro/src/m/js/equals.mjs";
 import Jimp from 'jimp';
 import gm from 'gm';
 export async function sandbox() {
+  let pixels;
   await simple_1();
-  await simple_2();
+  pixels = await simple_2();
   await simple_3();
-  const image_path = 'src/d.png';
-  let pixels = await image_to_pixels(image_path);
+  if (false) {
+    const image_path = 'src/d.png';
+    pixels = await image_to_pixels(image_path);
+  }
   let segments = await to_segments(pixels);
-  return;
   let glued = await glue_segments_all(segments);
   let midpointed = await segments_midpoint_all(glued);
+  return;
   let scale_factor = 10;
   console.log({midpointed})
   return;
@@ -86,6 +89,7 @@ async function simple_2() {
   let actual3 = await segments_midpoint_all(actual2);
   let expected3 = [[[1,2],[1.5,1]],[[1,2],[1.5,3]],[[2,2],[1.5,1]],[[2,2],[1.5,3]]];
   await m_js_assert(json_equals)(actual3, expected3);
+  return simple;
 }
 async function simple_1() {
   let simple = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
