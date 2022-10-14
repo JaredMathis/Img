@@ -7,9 +7,11 @@ export async function sandbox() {
 async function to_segments(grid) {
   await m_js_for_each(grid, async (row, row_index) => {
     await m_js_for_each(row, async (col, col_index) => {
+      let value = grid[row_index][col_index];
       console.log({
         row_index,
-        col_index
+        col_index,
+        value
       });
     });
   });
