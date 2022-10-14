@@ -22,20 +22,29 @@ export async function sandbox() {
     }
   }
 
-  let image = new Jimp(pixels[0].length, pixels.length, function (err, image) {
-    if (err) throw err;
-  
-    pixels.forEach((row, y) => {
-      row.forEach((color, x) => {
-        image.setPixelColor(color === 0 ? 0xFFFFFFFF : 0x000000FF, x, y);
+  await pixels_to_image(pixels, 'src/test.png');
+}  
+function pixels_to_image(pixels, image_path) {
+  return new Promise((resolve, reject) => {
+    new Jimp(pixels[0].length, pixels.length, function (err, image) {
+      if (err)
+        throw err;
+
+      pixels.forEach((row, y) => {
+        row.forEach((color, x) => {
+          image.setPixelColor(color === 0 ? 0xFFFFFFFF : 0x000000FF, x, y);
+        });
+      });
+
+      image.write(image_path, (err) => {
+        if (err)
+          throw err;
+        resolve();
       });
     });
-  
-    image.write('src/test.png', (err) => {
-      if (err) throw err;
-    });
   });
-}  
+}
+
 async function simple_3() {
   let actual = await glue_segments([[1, 2], [1, 3]], [[1, 3], [1, 4]]);
   let expected = [[1, 4], [1, 2]];
